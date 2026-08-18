@@ -118,19 +118,13 @@ body {
     to the listing. Nothing else on the page has to change.
 */
 .badge-soon {
-    display: inline-flex; align-items: center; gap: 10px;
+    display: inline-flex; align-items: center;
     padding: 15px 30px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--card-edge);
     font-size: 1.02rem; font-weight: 600;
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-}
-
-.badge-soon .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--recordings);
-    box-shadow: 0 0 12px var(--recordings);
 }
 
 .cta-note { font-size: 0.9rem; color: var(--ink-faint); }
