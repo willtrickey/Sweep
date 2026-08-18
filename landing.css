@@ -166,15 +166,16 @@ h2 {
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
 }
 
-/* The swatch carries the category's own colour, exactly as the tile's glyph
-   does in the app — but the name is always there too, so nothing depends on
-   colour alone. */
-.find .swatch {
-    width: 26px; height: 26px; border-radius: 9px;
+/* The glyph carries the category's own colour, exactly as the tile's does in
+   the app — but the name is always there too, so nothing depends on colour
+   alone. Drawn as inline SVG rather than set in SF Symbols, which are
+   licensed for Apple-platform UI and cannot be shipped on a web page. */
+.find .icon {
+    display: block;
     margin-bottom: 12px;
-    background: currentColor;
-    box-shadow: 0 0 22px currentColor;
-    opacity: 0.95;
+    /* No glow. A stroked glyph blooms into itself and loses its own shape —
+       the swatch it replaced could carry one because it had no detail to
+       lose. */
 }
 
 .find h3 { font-size: 1rem; margin-bottom: 5px; color: var(--ink); }
@@ -260,7 +261,7 @@ a:focus-visible {
 @media (max-width: 560px) {
     .finds { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .find { padding: 16px; border-radius: 20px; }
-    .find .swatch { width: 22px; height: 22px; margin-bottom: 10px; }
+    .find .icon { width: 24px; height: 24px; margin-bottom: 10px; }
     .find h3 { font-size: 0.94rem; }
     .find p { font-size: 0.82rem; line-height: 1.45; }
     .hero { padding: 64px 0 56px; }
