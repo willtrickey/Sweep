@@ -3,32 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sweep</title>
-    <!--
-        Interim holding page.
+    <title>Sweep — find what's filling up your iPhone</title>
+    <meta name="description" content="Sweep finds the screenshots, duplicates, big videos and hidden Live Photo videos quietly filling up your iPhone. Everything happens on your device.">
+    <meta name="theme-color" content="#000000">
 
-        This address used to serve the privacy policy itself, and builds of the
-        app already in testers' hands open it expecting exactly that — so it
-        redirects rather than 404s. The policy now lives at its own stable
-        address, which is where the app points from the next build onwards.
+    <meta property="og:title" content="Sweep — find what's filling up your iPhone">
+    <meta property="og:description" content="Forgotten screenshots, near-duplicates, oversized video, and the video hidden inside every Live Photo. You choose what goes, and nothing leaves your device.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="icon-512.png">
+    <meta name="twitter:card" content="summary_large_image">
 
-        When the marketing page is ready it replaces this file. By then no
-        build in circulation depends on this address serving the policy, so
-        the swap breaks nothing.
-    -->
-    <meta http-equiv="refresh" content="0; url=privacy.html">
-    <link rel="canonical" href="privacy.html">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="apple-touch-icon" href="icon-180.png">
+    <link rel="icon" href="icon-180.png">
+    <link rel="stylesheet" href="landing.css">
 </head>
 <body>
-    <div class="container">
-        <main>
-            <!-- Shown only if the redirect above doesn't fire. -->
-            <p>The Sweep privacy policy has moved to <a href="privacy.html">privacy.html</a>.</p>
-        </main>
-    </div>
+
+    <header class="hero">
+        <div class="aurora" aria-hidden="true"></div>
+        <div class="wrap">
+            <img class="app-icon" src="icon-512.png" width="132" height="132"
+                 alt="The Sweep app icon">
+
+            <h1 class="display">Sweep</h1>
+
+            <p class="lede">
+                Find what's quietly filling up your iPhone, and decide what goes.
+            </p>
+
+            <div class="cta">
+                <!--
+                    SWAP POINT — when the app is live on the App Store, replace
+                    this element with Apple's official "Download on the App
+                    Store" badge (from Apple's marketing guidelines) wrapped in
+                    a link to the listing. Nothing else on the page changes.
+                -->
+                <div class="badge-soon">
+                    <span class="dot" aria-hidden="true"></span>
+                    Coming to the App Store
+                </div>
+                <p class="cta-note">iPhone, iPad and Mac · iOS 18 or later</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="band">
+            <div class="wrap">
+                <h2 class="display">What it finds</h2>
+                <p class="intro">
+                    Sweep sorts your photo library into the things that actually
+                    take up room, so you can look at one kind at a time instead
+                    of scrolling through everything.
+                </p>
+
+                <div class="finds">
+                    <div class="find" style="color: var(--screenshots)">
+                        <div class="swatch" aria-hidden="true"></div>
+                        <h3>Screenshots</h3>
+                        <p>Screen grabs you saved once and never opened again.</p>
+                    </div>
+
+                    <div class="find" style="color: var(--whatsapp)">
+                        <div class="swatch" aria-hidden="true"></div>
+                        <h3>Sent in WhatsApp</h3>
+                        <p>Media WhatsApp saved to your Camera Roll, which still lives in the chat.</p>
+                    </div>
+
+                    <div class="find" style="color: var(--recordings)">
+                        <div class="swatch" aria-hidden="true"></div>
+                        <h3>Screen Recordings</h3>
+                        <p>Captured screen video, which runs far larger than it looks.</p>
+                    </div>
+
+                    <div class="find" style="color: var(--duplicates)">
+                        <div class="swatch" aria-hidden="true"></div>
+                        <h3>Duplicates</h3>
+                        <p>Near-identical shots taken seconds apart, grouped so you always keep one.</p>
+                    </div>
+
+                    <div class="find" style="color: var(--large-photos)">
+                        <div class="swatch" aria-hidden="true"></div>
+                        <h3>Large Photos</h3>
+                        <p>The heaviest photos in your library, biggest first.</p>
+                    </div>
+
+                    <div class="find" style="color: var(--large-videos)">
+                        <div class="swatch" aria-hidden="true"></div>
+                        <h3>Large Videos</h3>
+                        <p>The heaviest videos in your library, biggest first.</p>
+                    </div>
+
+                    <div class="find" style="color: var(--live-photos)">
+                        <div class="swatch" aria-hidden="true"></div>
+                        <h3>Live Photos</h3>
+                        <p>Photos carrying a short video you can drop while keeping the picture.</p>
+                    </div>
+
+                    <div class="find" style="color: var(--downloaded)">
+                        <div class="swatch" aria-hidden="true"></div>
+                        <h3>Downloaded</h3>
+                        <p>Pictures that look saved from somewhere else rather than taken here.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="band">
+            <div class="wrap">
+                <h2 class="display">Two places to look</h2>
+                <p class="intro">
+                    Photos is where most of the space goes. Files is for
+                    everything else you've pointed at it.
+                </p>
+
+                <div class="pair">
+                    <div class="card">
+                        <h3>Your photo library</h3>
+                        <p>
+                            Sweep reads your library and works out where the space
+                            actually went. Every category says how it was found —
+                            some are exact, some are a best guess, and Sweep tells
+                            you which is which rather than leaving a confident
+                            number to speak for itself.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>A folder of your choosing</h3>
+                        <p>
+                            Point Sweep at a folder and it lists the large files
+                            inside it, grouped by kind and sorted by size. Useful
+                            for the downloads and documents that never show up in
+                            a photo app.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="band">
+            <div class="wrap">
+                <div class="promise">
+                    <h2 class="display">Nothing leaves your device</h2>
+                    <p>
+                        Sweep reads your library on device to work out what's
+                        taking up space. Nothing is uploaded, nothing is shared,
+                        and nothing is deleted unless you choose it. Photos you
+                        delete wait in Recently Deleted, the same as deleting
+                        them from the Photos app.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <nav>
+                <a href="privacy.html">Privacy</a>
+                <a href="support.html">Support</a>
+            </nav>
+            <p>&copy; <span id="year">2026</span> Will Trickey. All rights reserved.</p>
+        </div>
+    </footer>
+
     <script>
-        location.replace('privacy.html');
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
