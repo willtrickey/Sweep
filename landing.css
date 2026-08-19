@@ -112,22 +112,61 @@ body {
 .cta { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 
 /*
-    Deliberately not Apple's "Download on the App Store" badge: that artwork is
-    Apple's, comes from their marketing guidelines, and shouldn't be redrawn.
-    When the app is live, swap this whole block for the official badge linking
-    to the listing. Nothing else on the page has to change.
+    The one thing on the page to press, so it is the one solid shape: light on
+    a dark hero is the strongest contrast the palette has, and the glass pills
+    everywhere else read as surface next to it rather than competing.
+
+    No TestFlight logo on it. That mark is Apple's, from the same marketing
+    guidelines as the App Store badge below, and redrawing Apple's artwork is
+    exactly what the pill under it refuses to do — the words carry it.
 */
-.badge-soon {
+.btn-primary {
     display: inline-flex; align-items: center;
     padding: 15px 30px;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--card-edge);
+    background: linear-gradient(160deg, #FFFFFF, rgb(var(--silver)));
+    color: rgb(var(--deep));
     font-size: 1.02rem; font-weight: 600;
+    text-decoration: none;
+    /* The glow is the icon's blue, so the button sits in the hero's gradient
+       rather than on top of it. */
+    box-shadow: 0 14px 34px rgba(var(--blue), 0.34);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 44px rgba(var(--sky), 0.36);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+/*
+    Status, not a call to action — it lost the button's weight when the beta
+    took the primary slot, and it is a div rather than a link because there is
+    no listing to open yet.
+
+    Still deliberately not Apple's "Download on the App Store" badge: that
+    artwork is Apple's, comes from their marketing guidelines, and shouldn't be
+    redrawn. When the app is live, swap this element for the official badge
+    linking to the listing.
+*/
+.badge-soon {
+    display: inline-flex; align-items: center;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-edge);
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--ink-dim);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
 }
 
 .cta-note { font-size: 0.9rem; color: var(--ink-faint); }
+
+/* The line runs to two on a phone. Held together at the phrases, it breaks
+   after a separator rather than through the middle of "iOS 18 or later". */
+.cta-note span { white-space: nowrap; }
 
 /* ---- Sections ---------------------------------------------------------- */
 
@@ -193,6 +232,16 @@ h2 {
 
 .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
 .card p  { color: var(--ink-dim); font-size: 0.96rem; }
+
+/* ---- Closing call to action -------------------------------------------- */
+
+/* The hero's button is several screens away by the time anyone reaches the
+   bottom, and scrolling back up to it is a thing people don't do. Centred,
+   unlike the other bands, because it is one line and a button rather than
+   something to read. */
+.closing { text-align: center; }
+.closing .intro { margin-left: auto; margin-right: auto; }
+.closing .btn-primary { margin-top: 4px; }
 
 /* ---- Privacy note ------------------------------------------------------ */
 
