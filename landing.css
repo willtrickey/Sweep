@@ -67,23 +67,102 @@ body {
     side of it, the icon's blue through the middle, and deep navy before the
     page's black. A real MeshGradient bends the bands; stacked radials get
     close enough at this size, and cost nothing to render.
+
+    The drift below is IridescentSurface's, translated. In the app both interior
+    rows of the mesh move in y across the full width and the centre column also
+    moves in x — the note there is that holding the row ends fixed and moving
+    only the centre "nails the bands in place and reads as no movement at all",
+    so every band here moves bodily rather than bulging from the middle.
 */
 .aurora {
     position: absolute;
     inset: -120px 0 auto 0;
     height: 760px;
     pointer-events: none;
-    background:
-        radial-gradient(58% 42% at 50% 4%,  rgba(var(--silver), 0.55), transparent 70%),
-        radial-gradient(70% 50% at 18% 10%, rgba(var(--sky), 0.42), transparent 72%),
-        radial-gradient(70% 50% at 84% 14%, rgba(var(--sky), 0.32), transparent 72%),
-        radial-gradient(92% 62% at 50% 34%, rgba(var(--blue), 0.50), transparent 76%),
-        radial-gradient(120% 80% at 50% 58%, rgba(var(--deep), 0.62), transparent 82%);
     /* The app's own mask stops, so the colour ends as the page rather than on
-       an edge. */
+       an edge. Masking the parent takes the drifting layers with it. */
     -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.9) 40%, transparent 100%);
             mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.9) 40%, transparent 100%);
+    /* Both needed now that the layers inside move. A mask repeats by default,
+       so a layer drifting past the bottom edge would meet the opaque top of the
+       next tile and reappear below the fade instead of ending in it. And the
+       clip keeps the 20% overhang doing its job — covering the frame — without
+       painting outside it. */
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    overflow: hidden;
 }
+
+.aurora div { position: absolute; inset: 0; }
+
+/*
+    The x-drifting bands are 140% wide, overhanging 20% each side. Translating a
+    whole layer sideways is not what the mesh does — there the outer columns
+    hold their x precisely so the fill always covers its frame — and a layer at
+    the container's own width slid 14% leaves a dark strip down that edge. The
+    overhang is what pins the frame instead: 20% of slack against 14% of travel.
+
+    Their horizontal radii are divided by that 1.4 so the blobs keep the
+    absolute width they had before the box grew — 92% of the hero is 66% of a
+    box half again as wide, and 120% is 86%. The vertical radii are untouched,
+    the box being no taller.
+
+    Qualified with .aurora because the reset above is a class plus a type and
+    outspecifies a bare class: as `.band-x` alone the overhang silently lost to
+    `inset: 0`, and the strip down the edge came back.
+*/
+.aurora .band-x { inset: 0 -20%; }
+
+/* The crown alone does not drift. Its silver is the mesh's top row, whose
+   corners are pinned in the app so the fill always covers its frame — and it
+   sits directly behind the app icon, where a travelling highlight would pull
+   the eye off the one thing the hero is for. */
+.crown  { background: radial-gradient(58% 42% at 50% 4%,  rgba(var(--silver), 0.55), transparent 70%); }
+.sky-l  .veil { background: radial-gradient(70% 50% at 18% 10%, rgba(var(--sky), 0.42), transparent 72%); }
+.sky-r  .veil { background: radial-gradient(70% 50% at 84% 14%, rgba(var(--sky), 0.32), transparent 72%); }
+.core   { background: radial-gradient(66% 62% at 50% 34%, rgba(var(--blue), 0.50), transparent 76%); }
+.deep   { background: radial-gradient(86% 80% at 50% 58%, rgba(var(--deep), 0.62), transparent 82%); }
+
+/*
+    Amplitudes are the app's, as fractions of the surface: ±0.09 in y, ±0.14 in
+    x for the centre column. Percentages in a translate resolve against the
+    layer's own box, so they stay proportional at any width, exactly as the
+    mesh's normalised points do.
+
+    A layer needing both axes nests, because one element has one transform: the
+    outer box carries x, the inner y, each on its own clock.
+*/
+@keyframes drift-y {
+    0%, 100% { transform: translateY(calc(var(--amp) * -1)); }
+    50%      { transform: translateY(var(--amp)); }
+}
+
+@keyframes drift-x {
+    0%, 100% { transform: translateX(calc(var(--amp) * -1)); }
+    50%      { transform: translateX(var(--amp)); }
+}
+
+/*
+    Periods are 2π/ω for the app's own frequencies — 0.41, 0.47, 0.53, 0.29,
+    0.61 and 0.34 rad/s — which is what keeps them mutually prime enough that
+    the surface never settles into a visible loop. The negative delays are the
+    app's phase offsets: they start each band part-way through rather than
+    lining every one up at the same extreme on load.
+
+    ease-in-out is a triangle wave with softened corners, not a true sine, but
+    at a 15-second period nothing in the difference is visible.
+*/
+.band-y, .band-x { animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+.band-y { --amp: 9%;  animation-name: drift-y; animation-iteration-count: infinite; }
+/* 10% of a box 1.4× the hero's width is the app's 14% of the surface. */
+.band-x { --amp: 10%; animation-name: drift-x; animation-iteration-count: infinite; }
+
+.sky-l  { animation-duration: 15.3s; animation-delay:  -1.0s; }
+.sky-r  { animation-duration: 13.4s; animation-delay:  -5.2s; }
+.core-x { animation-duration: 21.7s; animation-delay:  -7.1s; }
+.core-y { animation-duration: 11.9s; animation-delay:  -3.9s; }
+.deep-x { animation-duration: 18.5s; animation-delay:  -2.2s; }
+.deep-y { animation-duration: 10.3s; animation-delay:  -6.4s; }
 
 /* Only the content is lifted above the gradient. Written as `.hero > *`
    this matched .aurora too — same specificity, later in the file — which
@@ -291,8 +370,13 @@ a:focus-visible {
     border-radius: 4px;
 }
 
-/* The app pauses every animation under Reduce Motion; the page has little to
-   pause, but the rule holds. */
+/*
+    The app pauses every animation under Reduce Motion, and forces elapsed time
+    to zero rather than freezing a frame, so a surface holds one settled shape
+    instead of an arbitrary one. Dropping the animation does the same thing here
+    for free: sin(0) is no offset, and an untransformed layer is no offset, so
+    the drift resolves to the same settled mesh either way.
+*/
 @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
 }

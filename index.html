@@ -20,7 +20,19 @@
 <body>
 
     <header class="hero">
-        <div class="aurora" aria-hidden="true"></div>
+        <!--
+            One layer per band, because the drift is a transform: the compositor
+            slides a finished layer instead of repainting a 760px-tall stack of
+            gradients every frame. Animating the gradients' own coordinates
+            (via @property) reads identically and repaints the lot each frame.
+        -->
+        <div class="aurora" aria-hidden="true">
+            <div class="veil crown"></div>
+            <div class="band-y sky-l"><div class="veil"></div></div>
+            <div class="band-y sky-r"><div class="veil"></div></div>
+            <div class="band-x core-x"><div class="band-y core-y"><div class="veil core"></div></div></div>
+            <div class="band-x deep-x"><div class="band-y deep-y"><div class="veil deep"></div></div></div>
+        </div>
         <div class="wrap">
             <img class="app-icon" src="icon-512.png" width="132" height="132"
                  alt="The Sweep app icon">
