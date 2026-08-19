@@ -216,7 +216,11 @@ h2 {
 
 /* ---- Two-up feature cards ---------------------------------------------- */
 
+/* This band's heading runs straight into the cards — it lost the intro
+   paragraph that used to hold them apart, so the gap lives here instead.
+   Collapses with the intro's own margin if a band ever regains one. */
 .pair {
+    margin-top: 30px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 16px;
