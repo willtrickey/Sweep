@@ -328,15 +328,12 @@ h2 {
 
 /* ---- Privacy note ------------------------------------------------------ */
 
-.promise {
-    border-radius: var(--radius);
-    padding: 40px 32px;
-    text-align: center;
-    background:
-        radial-gradient(90% 140% at 50% 0%, rgba(var(--blue), 0.22), transparent 70%),
-        var(--card);
-    border: 1px solid var(--card-edge);
-}
+/* Not a card. The promise is the page speaking plainly rather than another
+   panel of features, and the glass it used to sit in put it on a level with
+   the tiles above — which is exactly the wrong level for the one claim the
+   reader is being asked to take on trust. The band's own padding gives it the
+   room the card's inset used to. */
+.promise { text-align: center; }
 
 .promise h2 { margin-bottom: 12px; }
 .promise p { color: var(--ink-dim); max-width: 52ch; margin: 0 auto; }
